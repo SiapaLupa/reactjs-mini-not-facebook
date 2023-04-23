@@ -69,7 +69,6 @@ function Post() {
       <div className="other">
         <div className="friend">
           <h2>Friends</h2>
-
           {!(user?.friends) ? user?.friends.map((friend) =>
             (<div>{friend.name}</div>)
           ) : <p>You have no friend</p>}

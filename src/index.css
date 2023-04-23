@@ -65,7 +65,29 @@ main {
 main > .post {
   border-bottom: 1px solid white;
   padding-inline: 1rem;
-  
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+p {
+  margin: 0;
+}
+main > .post > div {
+  min-width: 30vw;
+  border-radius: 1vw;
+  padding: 1rem;
+  background-color: #1a1a1a60;
+}
+* {
+  /* outline: 1px solid red */
+}
+nav {
+  display: flex;
+  justify-content: center;
+}
+a {
+  display: block;
+  padding: 1rem;
 }
 
 @media (prefers-color-scheme: light) {
