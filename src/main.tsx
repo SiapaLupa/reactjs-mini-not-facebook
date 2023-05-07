@@ -1,32 +1,33 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App'
-import Post from './Post'
+import Landing from './Landing'
+import Post from './Home'
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 import './index.css'
-import Login from './Login';
-import Register from './Register';
 import NavBar from "./templates/NavBar";
+import Notification from './Notification';
+import SignOut from './SignOut';
+import Home from './Home';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Landing />,
   },
   {
-    path: "/post",
-    element: <Post />
+    path: "/signout",
+    element: <SignOut />
   },
   {
-    path: "/signin",
-    element: <Login />
+    path: "/home",
+    element: <Home />
   },
   {
-    path: "/signup",
-    element: <Register />
+    path: "/notification",
+    element: <Notification />
   }
 ]);
 

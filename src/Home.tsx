@@ -3,6 +3,11 @@ import React, { ReactNode, useEffect, useState } from "react"
 const postUrl = "http://localhost:5000/post"
 const userUrl = "http://localhost:5000/user/me"
 
+enum Status {
+  OK = 200,
+  Unauthorized = 401
+}
+
 export interface PostSchema {
   _id: string;
   title: string;
@@ -27,7 +32,7 @@ export interface UserSchema {
   likes: Array<PostSchema["_id"]>;
 }
 
-function Post() {
+export default function Home() {
   const [posts, setPosts] = useState<PostSchema[]>([])
   const [user, setUser] = useState<UserSchema>();
   useEffect(() => {
@@ -41,10 +46,13 @@ function Post() {
   }, [])
   useEffect(() => {
     fetch(userUrl, { credentials: "include" })
-      .then(response => {
-        return response.json()
+      .then((response: Response) => {
+        if (response.ok) return response.json()
+        if (response.status === Status.Unauthorized) window.location.href = "/signin"
       })
       .then(response => {
+        console.log(response);
+        
         setUser(response.user)
       })
   }, [])
@@ -52,12 +60,10 @@ function Post() {
   return (
     <main>
       <div className="profile">
-        <div>
-          {user?.name}
-        </div>
+        <p>Welcome, <u>{user?.name}!</u></p>
       </div>
       <div className="post">
-        {posts.map((post, index) => (
+        {posts?.map((post, index) => (
           <div key={index}>
             <p>{post.author.name}</p>
             <p>{new Intl.DateTimeFormat('id', { dateStyle: 'full' }).format(new Date(post.createdAt))}</p>
@@ -77,5 +83,3 @@ function Post() {
     </main>
   )
 }
-
-export default Post
